@@ -19,15 +19,26 @@
  *
  */
 
-package marcosambrosi.movieit.screen;
+package marcosambrosi.movieit.view;
 
-import flow.Layout;
-import marcosambrosi.movieit.R;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.RelativeLayout;
 
 /**
- * Created by Marcos on 14/05/2015.
+ * Created by Marcos on 23/05/2015.
  */
-@Layout(R.layout.movie_list_view)
-public class ListMoviesScreen  {
+public class ListMoviesView extends RelativeLayout {
 
+    public ListMoviesView(Context context) {
+        super(context);
+    }
+
+    public ListMoviesView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ListMoviesView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 }

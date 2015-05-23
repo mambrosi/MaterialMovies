@@ -21,8 +21,24 @@
 
 package marcosambrosi.movieit.screen;
 
+import flow.HasParent;
+import flow.Layout;
+import marcosambrosi.movieit.R;
+
 /**
  * Created by Marcos on 14/05/2015.
  */
-public class MovieScreen {
+@Layout(R.layout.movie_view)
+public class MovieScreen implements HasParent<ListMoviesScreen> {
+
+    public long id;
+
+    public MovieScreen(long id){
+        this.id = id;
+    }
+
+    @Override
+    public ListMoviesScreen getParent() {
+        return new ListMoviesScreen();
+    }
 }
