@@ -19,18 +19,14 @@
  *
  */
 
-package marcosambrosi.movieit.network;
-
-import marcosambrosi.movieit.model.MovieResponse;
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+package marcosambrosi.mmovies.util;
 
 /**
  * Created by marcosambrosi on 5/6/15.
  */
-public interface MovieItService {
+public class Constants {
 
-    @GET("/discover/movie")
-    void discoverMovie(@Path("page") int page, Callback<MovieResponse> callback);
+    public static final String API_KEY = "2ff37dad067cc303b43f42c955f94193";
+    public static final String BASE_URL = "http://api.themoviedb.org/3/";
+
 }

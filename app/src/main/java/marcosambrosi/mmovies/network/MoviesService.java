@@ -19,26 +19,18 @@
  *
  */
 
-package marcosambrosi.movieit.view;
+package marcosambrosi.mmovies.network;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import marcosambrosi.mmovies.model.MovieResponse;
+import retrofit.Callback;
+import retrofit.http.GET;
+import retrofit.http.Path;
 
 /**
- * Created by Marcos on 23/05/2015.
+ * Created by marcosambrosi on 5/6/15.
  */
-public class ListMoviesView extends RelativeLayout {
+public interface MoviesService {
 
-    public ListMoviesView(Context context) {
-        super(context);
-    }
-
-    public ListMoviesView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public ListMoviesView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+    @GET("/discover/movie")
+    void discoverMovie(@Path("page") int page, Callback<MovieResponse> callback);
 }

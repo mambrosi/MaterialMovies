@@ -35,7 +35,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "marcosambrosi.movieit"
+        applicationId "marcosambrosi.mmovies"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1

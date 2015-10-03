@@ -19,10 +19,10 @@
  *
  */
 
-package marcosambrosi.movieit.network;
+package marcosambrosi.mmovies.network;
 
-import marcosambrosi.movieit.model.MovieResponse;
-import marcosambrosi.movieit.util.Constants;
+import marcosambrosi.mmovies.model.MovieResponse;
+import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 
@@ -32,7 +32,7 @@ import retrofit.RestAdapter;
 public class ServiceController {
 
     private static ServiceController sInstance;
-    private static MovieItService sService;
+    private static MoviesService sService;
 
     private static String sAuthToken;
 
@@ -50,7 +50,7 @@ public class ServiceController {
                 .setLogLevel(RestAdapter.LogLevel.FULL);
 
 
-        sService = restAdapter.build().create(MovieItService.class);
+        sService = restAdapter.build().create(MoviesService.class);
     }
 
     public static ServiceController getInstance() {
