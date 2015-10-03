@@ -21,6 +21,7 @@
 
 package marcosambrosi.mmovies.network;
 
+import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.MovieResponse;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
@@ -60,7 +61,11 @@ public class ServiceController {
         return sInstance;
     }
 
-    public void discoverMovies(int page, Callback<MovieResponse> callback){
+    public void discoverMovies(int page, Callback<MovieResponse> callback) {
         sService.discoverMovie(page, callback);
+    }
+
+    public void configuration(Callback<Configuration> callback) {
+        sService.configuration(Constants.API_KEY, callback);
     }
 }

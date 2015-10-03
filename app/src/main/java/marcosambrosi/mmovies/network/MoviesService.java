@@ -21,10 +21,12 @@
 
 package marcosambrosi.mmovies.network;
 
+import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.MovieResponse;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 /**
  * Created by marcosambrosi on 5/6/15.
@@ -33,4 +35,9 @@ public interface MoviesService {
 
     @GET("/discover/movie")
     void discoverMovie(@Path("page") int page, Callback<MovieResponse> callback);
+
+    @GET("/configuration")
+    void configuration(@Query("api_key") String apiKey, Callback<Configuration> callback);
+
+
 }

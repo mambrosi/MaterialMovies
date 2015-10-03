@@ -27,7 +27,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import marcosambrosi.movieit.R;
+import marcosambrosi.mmovies.R;
+
 
 public class MainActivity extends ActionBarActivity {
 
