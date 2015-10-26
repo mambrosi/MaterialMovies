@@ -22,12 +22,20 @@
 package marcosambrosi.mmovies.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
+import marcosambrosi.mmovies.model.Configuration;
+import marcosambrosi.mmovies.network.ServiceController;
+import marcosambrosi.mmovies.util.Constants;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -37,11 +45,42 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.splash_screen);
+
+
+        if (MoviesApplication.getInstance().hasConfiguration()) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    listOnCreate();
+                }
+            }, 2000);
+        }
+
+        ServiceController.getInstance().configuration(new Callback<Configuration>() {
+            @Override
+            public void success(Configuration configuration, Response response) {
+                MoviesApplication.getInstance().addPreference(Constants.PREFERENCES.CONFIG,
+                        configuration.toJsonString());
+
+                listOnCreate();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                //Handle this
+            }
+        });
+
+
+    }
+
+    private void listOnCreate() {
         setContentView(R.layout.activity_main);
 
 //        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
     }
 

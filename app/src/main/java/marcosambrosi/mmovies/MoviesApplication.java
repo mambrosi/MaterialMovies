@@ -2,15 +2,9 @@ package marcosambrosi.mmovies;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
-import com.google.gson.Gson;
-
-import marcosambrosi.mmovies.model.Configuration;
-import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by marcosambrosi on 10/3/15.
@@ -18,6 +12,7 @@ import retrofit.client.Response;
 public class MoviesApplication extends Application {
 
 
+    private static MoviesApplication sInstance;
     private SharedPreferences mSharedPreferences;
 
 
@@ -25,31 +20,10 @@ public class MoviesApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        sInstance = this;
         mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
 
-        checkIfCallConfigurationServiceNeeded();
     }
-
-    private void checkIfCallConfigurationServiceNeeded() {
-        ServiceController.getInstance().configuration(new Callback<Configuration>() {
-            @Override
-            public void success(Configuration configuration, Response response) {
-                if (configuration != null) {
-                    addPreference(Constants.PREFERENCES.CONFIG,
-                            new Gson().toJson(configuration,
-                                    Configuration.class));
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (error != null) {
-
-                }
-            }
-        });
-    }
-
 
     public void addPreference(String key, String value) {
         if (mSharedPreferences != null) {
@@ -57,11 +31,27 @@ public class MoviesApplication extends Application {
         }
     }
 
+    public boolean hasConfiguration() {
+        return TextUtils.isEmpty(getPreference(Constants.PREFERENCES.CONFIG));
+    }
+
+    public String getPreference(String key) {
+        if (mSharedPreferences != null) {
+            return mSharedPreferences.getString(key, "");
+        }
+
+        return "";
+    }
+
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-
+        sInstance = null;
         mSharedPreferences = null;
+    }
+
+    public static MoviesApplication getInstance() {
+        return sInstance;
     }
 }

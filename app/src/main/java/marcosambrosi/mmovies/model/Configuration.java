@@ -1,5 +1,6 @@
 package marcosambrosi.mmovies.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -15,5 +16,15 @@ public class Configuration {
 
     @SerializedName("change_keys")
     List<String> changeKeys;
+
+
+    public String toJsonString() {
+        return new Gson().toJson(this,
+                Configuration.class);
+    }
+
+    public Configuration fromJsonString(String jsonString) {
+        return new Gson().fromJson(jsonString, Configuration.class);
+    }
 
 }
