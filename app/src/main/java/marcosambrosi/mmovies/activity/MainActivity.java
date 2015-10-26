@@ -24,13 +24,16 @@ package marcosambrosi.mmovies.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import marcosambrosi.mmovies.MoviesAdapter;
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.model.Configuration;
+import marcosambrosi.mmovies.model.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
@@ -50,6 +53,12 @@ public class MainActivity extends ActionBarActivity {
 
 
         if (MoviesApplication.getInstance().hasConfiguration()) {
+            String configString = MoviesApplication.getInstance().
+                    getPreference(Constants.PREFERENCES.CONFIG);
+
+            Configuration configuration = Configuration.fromJsonString(configString);
+
+            MoviesApplication.getInstance().setConfiguration(configuration);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -63,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
             public void success(Configuration configuration, Response response) {
                 MoviesApplication.getInstance().addPreference(Constants.PREFERENCES.CONFIG,
                         configuration.toJsonString());
-
+                MoviesApplication.getInstance().setConfiguration(configuration);
                 listOnCreate();
             }
 
@@ -79,8 +88,42 @@ public class MainActivity extends ActionBarActivity {
     private void listOnCreate() {
         setContentView(R.layout.activity_main);
 
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_movies);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(
+                this,
+                2,
+                GridLayoutManager.VERTICAL,
+                false);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return (position % 3 == 0 ? 2 : 1);
+            }
+        });
+        recyclerViewMovies.setLayoutManager(gridLayoutManager);
+
+        final MoviesAdapter adapter = new MoviesAdapter();
+
+        recyclerViewMovies.setAdapter(adapter);
+
+        ServiceController.getInstance().discoverMovies(1, new Callback<MovieResponse>() {
+            @Override
+            public void success(MovieResponse movieResponse, Response response) {
+                if (movieResponse != null) {
+                    adapter.addAll(movieResponse.movies);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                if (error != null) {
+
+                }
+            }
+        });
+
 
     }
 

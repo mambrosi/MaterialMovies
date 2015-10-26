@@ -21,6 +21,8 @@
 
 package marcosambrosi.mmovies.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -28,5 +30,7 @@ import java.util.List;
  */
 public class MovieResponse {
 
-    List<Movie> movies;
+
+    @SerializedName("results")
+    public List<Movie> movies;
 }

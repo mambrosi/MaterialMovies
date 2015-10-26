@@ -23,7 +23,7 @@ public class Configuration {
                 Configuration.class);
     }
 
-    public Configuration fromJsonString(String jsonString) {
+    public static Configuration fromJsonString(String jsonString) {
         return new Gson().fromJson(jsonString, Configuration.class);
     }
 

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.util.Constants;
 
 /**
@@ -14,6 +15,7 @@ public class MoviesApplication extends Application {
 
     private static MoviesApplication sInstance;
     private SharedPreferences mSharedPreferences;
+    private Configuration mConfiguration;
 
 
     @Override
@@ -53,5 +55,13 @@ public class MoviesApplication extends Application {
 
     public static MoviesApplication getInstance() {
         return sInstance;
+    }
+
+    public Configuration getConfiguration() {
+        return mConfiguration;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+        this.mConfiguration = mConfiguration;
     }
 }
