@@ -29,7 +29,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import marcosambrosi.mmovies.MoviesAdapter;
+import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.model.Configuration;
@@ -65,22 +65,22 @@ public class MainActivity extends ActionBarActivity {
                     listOnCreate();
                 }
             }, 2000);
+        } else {
+            ServiceController.getInstance().configuration(new Callback<Configuration>() {
+                @Override
+                public void success(Configuration configuration, Response response) {
+                    MoviesApplication.getInstance().addPreference(Constants.PREFERENCES.CONFIG,
+                            configuration.toJsonString());
+                    MoviesApplication.getInstance().setConfiguration(configuration);
+                    listOnCreate();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    //Handle this
+                }
+            });
         }
-
-        ServiceController.getInstance().configuration(new Callback<Configuration>() {
-            @Override
-            public void success(Configuration configuration, Response response) {
-                MoviesApplication.getInstance().addPreference(Constants.PREFERENCES.CONFIG,
-                        configuration.toJsonString());
-                MoviesApplication.getInstance().setConfiguration(configuration);
-                listOnCreate();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                //Handle this
-            }
-        });
 
 
     }
@@ -88,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
     private void listOnCreate() {
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_movies);
+        RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(
                 this,
@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
 
         recyclerViewMovies.setAdapter(adapter);
 
-        ServiceController.getInstance().discoverMovies(1, new Callback<MovieResponse>() {
+        ServiceController.getInstance().discoverMovies(new Callback<MovieResponse>() {
             @Override
             public void success(MovieResponse movieResponse, Response response) {
                 if (movieResponse != null) {

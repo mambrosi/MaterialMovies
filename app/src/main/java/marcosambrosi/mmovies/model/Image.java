@@ -10,24 +10,24 @@ import java.util.List;
 public class Image {
 
     @SerializedName("base_url")
-    String baseUrl;
+    public String baseUrl;
 
     @SerializedName("secure_base_url")
-    String secureBaseUrl;
+    public String secureBaseUrl;
 
     @SerializedName("backdrop_sizes")
-    List<String> backdropSizes;
+    public List<String> backdropSizes;
 
     @SerializedName("logo_sizes")
-    List<String> logoSizes;
+    public List<String> logoSizes;
 
     @SerializedName("poster_sizes")
-    List<String> posterSizes;
+    public List<String> posterSizes;
 
     @SerializedName("profile_sizes")
-    List<String> profileSizes;
+    public List<String> profileSizes;
 
     @SerializedName("still_sizes")
-    List<String> stillSizes;
+    public List<String> stillSizes;
 
 }

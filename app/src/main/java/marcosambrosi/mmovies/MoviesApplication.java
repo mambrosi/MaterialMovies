@@ -34,7 +34,7 @@ public class MoviesApplication extends Application {
     }
 
     public boolean hasConfiguration() {
-        return TextUtils.isEmpty(getPreference(Constants.PREFERENCES.CONFIG));
+        return !TextUtils.isEmpty(getPreference(Constants.PREFERENCES.CONFIG));
     }
 
     public String getPreference(String key) {
@@ -62,6 +62,6 @@ public class MoviesApplication extends Application {
     }
 
     public void setConfiguration(Configuration configuration) {
-        this.mConfiguration = mConfiguration;
+        this.mConfiguration = configuration;
     }
 }

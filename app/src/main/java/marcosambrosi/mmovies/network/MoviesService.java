@@ -25,7 +25,6 @@ import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.MovieResponse;
 import retrofit.Callback;
 import retrofit.http.GET;
-import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -34,7 +33,7 @@ import retrofit.http.Query;
 public interface MoviesService {
 
     @GET("/discover/movie")
-    void discoverMovie(@Path("page") int page, Callback<MovieResponse> callback);
+    void discoverMovie(@Query("api_key") String apiKey, Callback<MovieResponse> callback);
 
     @GET("/configuration")
     void configuration(@Query("api_key") String apiKey, Callback<Configuration> callback);

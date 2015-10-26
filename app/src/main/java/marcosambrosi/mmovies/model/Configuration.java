@@ -12,7 +12,7 @@ public class Configuration {
 
 
     @SerializedName("images")
-    Image image;
+    public Image image;
 
     @SerializedName("change_keys")
     List<String> changeKeys;
@@ -26,5 +26,7 @@ public class Configuration {
     public static Configuration fromJsonString(String jsonString) {
         return new Gson().fromJson(jsonString, Configuration.class);
     }
+
+
 
 }

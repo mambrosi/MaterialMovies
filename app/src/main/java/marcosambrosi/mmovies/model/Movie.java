@@ -42,8 +42,12 @@ public class Movie {
     public String title;
 
     @SerializedName("poster_path")
-    public String posterUrl;
+    public String posterPath;
+
+    @SerializedName("backdrop_path")
+    public String backdropPath;
+
 
     @SerializedName("vote_average")
-    public int averageVotes;
+    public double averageVotes;
 }
