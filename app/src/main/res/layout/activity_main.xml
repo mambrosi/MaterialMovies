@@ -31,10 +31,4 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"/>-->
 
-    <ProgressBar
-        android:id="@+id/bundleListProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/abc_ab_share_pack_mtrl_alpha" />
 </RelativeLayout>
