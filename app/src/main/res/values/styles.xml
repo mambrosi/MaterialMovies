@@ -22,6 +22,8 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
 
         <!-- enable window content transitions -->
         <item name="android:windowContentTransitions">true</item>

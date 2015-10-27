@@ -28,6 +28,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -93,6 +94,8 @@ public class MainActivity extends ActionBarActivity implements MoviesAdapter.OnM
 
     private void listOnCreate() {
         setContentView(R.layout.activity_main);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
 

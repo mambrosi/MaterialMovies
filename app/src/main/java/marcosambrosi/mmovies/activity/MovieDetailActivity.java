@@ -1,9 +1,10 @@
 package marcosambrosi.mmovies.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -12,12 +13,19 @@ import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.model.Movie;
 import marcosambrosi.mmovies.util.Constants;
 
-public class MovieDetailActivity extends ActionBarActivity {
+public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Movie movie = Movie.fromJsonString(getIntent().getStringExtra(Constants.EXTRA.MOVIE));
 
@@ -33,8 +41,12 @@ public class MovieDetailActivity extends ActionBarActivity {
                 .error(R.color.darker_color)
                 .into(movieImage);
 
-        ((TextView) findViewById(R.id.movie_title)).setText(movie.title);
-        ((TextView) findViewById(R.id.movie_overview)).setText(movie.overview);
+
+        ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).
+                setTitle(movie.title);
+
+//        ((TextView) findViewById(R.id.movie_title)).setText(movie.title);
+//        ((TextView) findViewById(R.id.movie_overview)).setText(movie.overview);
 
     }
 
