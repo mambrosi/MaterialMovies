@@ -41,6 +41,8 @@ public class Movie {
 
     public String title;
 
+    public String overview;
+
     @SerializedName("poster_path")
     public String posterPath;
 

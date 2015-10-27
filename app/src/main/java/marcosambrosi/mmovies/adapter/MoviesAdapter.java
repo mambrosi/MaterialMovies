@@ -40,6 +40,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         holder.movieTitle.setText(movie.title);
 
+
+        holder.movieOverview.setText(movie.overview);
+
         String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
                 .concat("w500")
                 .concat(movie.backdropPath);
@@ -64,6 +67,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         TextView movieTitle;
         ImageView movieImage;
+        TextView movieOverview;
 
 
         public MovieViewHolder(View itemView) {
@@ -71,6 +75,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
             movieTitle = (TextView) itemView.findViewById(R.id.movie_title);
             movieImage = (ImageView) itemView.findViewById(R.id.movie_image);
+            movieOverview = (TextView) itemView.findViewById(R.id.movie_overview);
 
         }
     }

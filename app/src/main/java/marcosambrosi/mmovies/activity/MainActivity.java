@@ -24,14 +24,14 @@ package marcosambrosi.mmovies.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
+import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
@@ -90,18 +90,8 @@ public class MainActivity extends ActionBarActivity {
 
         RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(
-                this,
-                2,
-                GridLayoutManager.VERTICAL,
-                false);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return (position % 3 == 0 ? 2 : 1);
-            }
-        });
-        recyclerViewMovies.setLayoutManager(gridLayoutManager);
+        recyclerViewMovies.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewMovies.setHasFixedSize(true);
 
         final MoviesAdapter adapter = new MoviesAdapter();
 
