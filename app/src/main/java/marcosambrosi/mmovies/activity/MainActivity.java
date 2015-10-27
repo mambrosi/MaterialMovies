@@ -21,16 +21,21 @@
 
 package marcosambrosi.mmovies.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.model.Configuration;
+import marcosambrosi.mmovies.model.Movie;
 import marcosambrosi.mmovies.model.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
@@ -39,9 +44,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements MoviesAdapter.OnMovieClickedListener {
 
-    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         if (MoviesApplication.getInstance().hasConfiguration()) {
+
             String configString = MoviesApplication.getInstance().
                     getPreference(Constants.PREFERENCES.CONFIG);
 
@@ -63,7 +68,10 @@ public class MainActivity extends ActionBarActivity {
                     listOnCreate();
                 }
             }, 2000);
+
         } else {
+
+
             ServiceController.getInstance().configuration(new Callback<Configuration>() {
                 @Override
                 public void success(Configuration configuration, Response response) {
@@ -93,6 +101,8 @@ public class MainActivity extends ActionBarActivity {
 
         final MoviesAdapter adapter = new MoviesAdapter();
 
+        adapter.setMovieClickedListener(this);
+
         recyclerViewMovies.setAdapter(adapter);
 
         ServiceController.getInstance().discoverMovies(new Callback<MovieResponse>() {
@@ -115,4 +125,15 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public void onMovieClicked(Movie movie, ImageView movieImage) {
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+
+
+        intent.putExtra(Constants.EXTRA.MOVIE, movie.toJsonString());
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, (View) movieImage, "movie_image");
+        startActivity(intent, options.toBundle());
+    }
 }

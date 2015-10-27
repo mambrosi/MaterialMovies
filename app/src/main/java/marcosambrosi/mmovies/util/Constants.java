@@ -32,4 +32,8 @@ public class Constants {
     public static class PREFERENCES {
         public static final String CONFIG = "marcosambrosi.mmovies.preferences.config";
     }
+
+    public static class EXTRA {
+        public static final String MOVIE = "marcosambrosi.mmovies.extra.movie";
+    }
 }

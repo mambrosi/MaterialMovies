@@ -21,6 +21,7 @@
 
 package marcosambrosi.mmovies.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -52,4 +53,13 @@ public class Movie {
 
     @SerializedName("vote_average")
     public double averageVotes;
+
+    public String toJsonString() {
+        return new Gson().toJson(this,
+                Movie.class);
+    }
+
+    public static Movie fromJsonString(String jsonString) {
+        return new Gson().fromJson(jsonString, Movie.class);
+    }
 }

@@ -22,6 +22,11 @@ import marcosambrosi.mmovies.model.Movie;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
     List<Movie> mMovies = new ArrayList<>();
+    OnMovieClickedListener mMovieClickedListener;
+
+    public interface OnMovieClickedListener {
+        void onMovieClicked(Movie movie, ImageView movieImage);
+    }
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,15 +39,27 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, int position) {
 
-        Movie movie = mMovies.get(position);
+        final Movie movie = mMovies.get(position);
+
+
 
         holder.movieTitle.setText(movie.title);
 
 
         holder.movieOverview.setText(movie.overview);
 
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMovieClickedListener != null) {
+                    mMovieClickedListener.onMovieClicked(movie, holder.movieImage);
+                }
+            }
+        });
         String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
                 .concat("w1280")
                 .concat(movie.backdropPath);
@@ -62,6 +79,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public void addAll(List<Movie> movies) {
         mMovies.addAll(movies);
         notifyDataSetChanged();
+    }
+
+    public void setMovieClickedListener(OnMovieClickedListener movieClickedListener) {
+        this.mMovieClickedListener = movieClickedListener;
     }
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
