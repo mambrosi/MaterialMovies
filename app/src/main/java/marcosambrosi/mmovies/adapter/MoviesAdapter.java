@@ -44,7 +44,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         holder.movieOverview.setText(movie.overview);
 
         String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
-                .concat("w500")
+                .concat("w1280")
                 .concat(movie.backdropPath);
 
         Picasso.with(holder.itemView.getContext())

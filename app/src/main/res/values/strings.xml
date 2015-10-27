@@ -20,7 +20,7 @@
   -->
 
 <resources>
-    <string name="app_name">MovieIt</string>
+    <string name="app_name">Material Movies</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
