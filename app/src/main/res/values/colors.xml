@@ -22,9 +22,10 @@
 <resources>
     <color name="white">#ffff</color>
 
-    <color name="custom_background">#FDFDFD</color>
-    <color name="custom_toolbar_background">#F95643</color>
-    <color name="custom_toolbar_background_dark">#e05141</color>
-    <color name="material_blue_grey_800">#7a7a7a</color>
     <color name="black_overlay">#79000000</color>
+
+
+    <color name="color_primary">#00BCD4</color>
+    <color name="darker_color">#0097A7</color>
+
 </resources>

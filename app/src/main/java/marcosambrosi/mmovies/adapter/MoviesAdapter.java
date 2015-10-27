@@ -49,8 +49,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         Picasso.with(holder.itemView.getContext())
                 .load(posterUrl)
-                .placeholder(R.color.material_blue_grey_800)
-                .error(R.color.material_blue_grey_800)
+                .placeholder(R.color.darker_color)
+                .error(R.color.darker_color)
                 .into(holder.movieImage);
     }
 
