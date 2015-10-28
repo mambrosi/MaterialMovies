@@ -59,7 +59,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         ImageView moviePoster = (ImageView) findViewById(R.id.movie_poster);
 
         String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
-                .concat("w1280")
+                .concat("w342")
                 .concat(movie.posterPath);
 
         Picasso.with(this)
