@@ -3,7 +3,6 @@ package marcosambrosi.mmovies.activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +34,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Movie movie = Movie.fromJsonString(getIntent().getStringExtra(Constants.EXTRA.MOVIE));
 
+        getSupportActionBar().setTitle(movie.title);
+
         final ImageView movieImage = (ImageView) findViewById(R.id.movie_image);
 
         String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
@@ -54,10 +55,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-        ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).
-                setTitle(movie.title);
     }
 
     private void colorToolbar(final ImageView source) {

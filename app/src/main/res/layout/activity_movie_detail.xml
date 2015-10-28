@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
@@ -9,7 +10,9 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:clipToPadding="false"
+        android:padding="@dimen/text_container_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
@@ -35,7 +38,6 @@
             android:background="?android:attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
 
 
         <android.support.design.widget.CollapsingToolbarLayout
