@@ -38,12 +38,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         final ImageView movieImage = (ImageView) findViewById(R.id.movie_image);
 
-        String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
+        String backdropUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
                 .concat("w1280")
                 .concat(movie.backdropPath);
 
         Picasso.with(this)
-                .load(posterUrl)
+                .load(backdropUrl)
                 .into(movieImage, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -55,6 +55,16 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     }
                 });
+
+        ImageView moviePoster = (ImageView) findViewById(R.id.movie_poster);
+
+        String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
+                .concat("w1280")
+                .concat(movie.posterPath);
+
+        Picasso.with(this)
+                .load(posterUrl)
+                .into(moviePoster);
     }
 
     private void colorToolbar(final ImageView source) {
