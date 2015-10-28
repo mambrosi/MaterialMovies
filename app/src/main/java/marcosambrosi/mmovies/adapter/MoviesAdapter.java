@@ -44,12 +44,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         final Movie movie = mMovies.get(position);
 
 
-
         holder.movieTitle.setText(movie.title);
 
 
         holder.movieOverview.setText(movie.overview);
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +87,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         TextView movieTitle;
         ImageView movieImage;
         TextView movieOverview;
+        View textContainer;
 
 
         public MovieViewHolder(View itemView) {
@@ -97,6 +96,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             movieTitle = (TextView) itemView.findViewById(R.id.movie_title);
             movieImage = (ImageView) itemView.findViewById(R.id.movie_image);
             movieOverview = (TextView) itemView.findViewById(R.id.movie_overview);
+            textContainer = itemView.findViewById(R.id.text_container);
 
         }
     }
