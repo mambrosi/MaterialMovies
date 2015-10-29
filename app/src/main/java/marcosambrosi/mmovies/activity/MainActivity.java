@@ -37,7 +37,7 @@ import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.Movie;
-import marcosambrosi.mmovies.model.MovieResponse;
+import marcosambrosi.mmovies.model.response.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;

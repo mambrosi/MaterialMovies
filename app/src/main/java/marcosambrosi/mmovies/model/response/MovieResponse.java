@@ -19,11 +19,13 @@
  *
  */
 
-package marcosambrosi.mmovies.model;
+package marcosambrosi.mmovies.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import marcosambrosi.mmovies.model.Movie;
 
 /**
  * Created by marcosambrosi on 5/6/15.

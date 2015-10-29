@@ -40,6 +40,8 @@ public class Movie {
 //            "vote_average": 10,
 //            "vote_count": 4
 
+    public String id;
+
     public String title;
 
     public String overview;

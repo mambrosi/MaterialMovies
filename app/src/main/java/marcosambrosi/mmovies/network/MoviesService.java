@@ -22,9 +22,11 @@
 package marcosambrosi.mmovies.network;
 
 import marcosambrosi.mmovies.model.Configuration;
-import marcosambrosi.mmovies.model.MovieResponse;
+import marcosambrosi.mmovies.model.response.MovieResponse;
+import marcosambrosi.mmovies.model.response.ReviewResponse;
 import retrofit.Callback;
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -34,6 +36,10 @@ public interface MoviesService {
 
     @GET("/discover/movie")
     void discoverMovie(@Query("api_key") String apiKey, Callback<MovieResponse> callback);
+
+    @GET("/movie/{id}/reviews")
+    void getMovieReviews(@Query("api_key") String apiKey, @Path("id") String movieId,
+                         Callback<ReviewResponse> callback);
 
     @GET("/configuration")
     void configuration(@Query("api_key") String apiKey, Callback<Configuration> callback);

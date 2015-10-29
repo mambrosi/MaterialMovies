@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_reviews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -15,14 +15,7 @@
         android:padding="@dimen/text_container_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/very_long_desc" />
-
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -22,7 +22,8 @@
 package marcosambrosi.mmovies.network;
 
 import marcosambrosi.mmovies.model.Configuration;
-import marcosambrosi.mmovies.model.MovieResponse;
+import marcosambrosi.mmovies.model.response.MovieResponse;
+import marcosambrosi.mmovies.model.response.ReviewResponse;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -67,5 +68,10 @@ public class ServiceController {
 
     public void configuration(Callback<Configuration> callback) {
         sService.configuration(Constants.API_KEY, callback);
+    }
+
+    public void getMovieReviews(String movieId, Callback<ReviewResponse> responseCallback) {
+        sService.getMovieReviews(Constants.API_KEY, movieId, responseCallback);
+
     }
 }
