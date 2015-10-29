@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -60,13 +60,19 @@
     </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_fave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_share"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:src="@drawable/ic_action_fave"
+        app:backgroundTint="@color/color_primary"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
         app:layout_anchor="@id/recycler_view_reviews"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/darker_color" />
 
 
 </android.support.design.widget.CoordinatorLayout>

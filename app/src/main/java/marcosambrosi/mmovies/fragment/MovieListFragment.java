@@ -114,7 +114,6 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
         } else if (TYPE_LATEST.equals(mListType)) {
             ServiceController.getInstance().nowPlaying(this);
         } else {
-
             throw new IllegalArgumentException("You need to provide a valid list type");
         }
 
