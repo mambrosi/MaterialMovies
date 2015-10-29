@@ -21,26 +21,20 @@
 
 package marcosambrosi.mmovies.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
 
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
-import marcosambrosi.mmovies.adapter.MoviesAdapter;
 import marcosambrosi.mmovies.fragment.MovieListFragment;
 import marcosambrosi.mmovies.model.Configuration;
-import marcosambrosi.mmovies.model.Movie;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
@@ -48,7 +42,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainActivity extends AppCompatActivity implements MoviesAdapter.OnMovieClickedListener {
+public class MainActivity extends AppCompatActivity{
 
 
     @Override
@@ -105,18 +99,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.OnM
 
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    public void onMovieClicked(Movie movie, ImageView movieImage) {
-        Intent intent = new Intent(this, MovieDetailActivity.class);
-
-
-        intent.putExtra(Constants.EXTRA.MOVIE, movie.toJsonString());
-
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(this, (View) movieImage, "movie_image");
-        startActivity(intent, options.toBundle());
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
