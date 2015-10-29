@@ -4,13 +4,18 @@
     android:layout_height="match_parent"
     tools:context="marcosambrosi.mmovies.fragment.MovieListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_movies"
+    <include layout="@layout/movies_content_view" />
+
+    <marcosambrosi.mmovies.view.StateView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/state_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:paddingBottom="@dimen/padding_small"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small"
-        android:paddingTop="@dimen/padding_small" />
+        app:contentResource="@layout/movies_content_view"
+        app:emptyResource="@layout/empty_view"
+        app:loadingResource="@layout/loading_view"
+
+        >
+
+    </marcosambrosi.mmovies.view.StateView>
 </FrameLayout>

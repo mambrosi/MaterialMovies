@@ -1,0 +1,9 @@
+<resources>
+
+    <declare-styleable name="StateView">
+        <attr name="loadingResource" format="reference" />
+        <attr name="contentResource" format="reference" />
+        <attr name="emptyResource" format="reference" />
+    </declare-styleable>
+
+</resources>

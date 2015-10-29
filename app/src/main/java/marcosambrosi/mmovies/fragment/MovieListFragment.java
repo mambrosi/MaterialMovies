@@ -22,6 +22,7 @@ import marcosambrosi.mmovies.model.Movie;
 import marcosambrosi.mmovies.model.response.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
+import marcosambrosi.mmovies.view.StateView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -45,6 +46,8 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
 
     private String mListType;
 
+    private MoviesAdapter mAdapter;
+
     public MovieListFragment() {
         // Required empty public constructor
     }
@@ -58,6 +61,7 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAdapter = new MoviesAdapter();
     }
 
     @Override
@@ -71,22 +75,37 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerViewMovies = (RecyclerView) view.findViewById(R.id.recycler_view_movies);
+        final StateView stateView = (StateView) view.findViewById(R.id.state_view);
 
-        recyclerViewMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
+        stateView.showLoading();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        RecyclerView recyclerViewMovies = (RecyclerView) stateView.
+                findViewById(R.id.recycler_view_movies);
+
         recyclerViewMovies.setHasFixedSize(true);
+        recyclerViewMovies.setLayoutManager(linearLayoutManager);
 
-        final MoviesAdapter adapter = new MoviesAdapter();
-
-        adapter.setMovieClickedListener(this);
-
-        recyclerViewMovies.setAdapter(adapter);
+        mAdapter.setMovieClickedListener(this);
+        recyclerViewMovies.setAdapter(mAdapter);
 
         Callback<MovieResponse> callback = new Callback<MovieResponse>() {
             @Override
             public void success(MovieResponse movieResponse, Response response) {
+
                 if (movieResponse != null) {
-                    adapter.addAll(movieResponse.movies);
+
+                    if (movieResponse.movies.isEmpty()) {
+                        stateView.showEmpty();
+                    } else {
+                        mAdapter.addAll(movieResponse.movies);
+                        stateView.showContent();
+                    }
+
+                } else {
+                    //TODO handle this error
                 }
             }
 
@@ -94,7 +113,7 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
             public void failure(RetrofitError error) {
 
                 if (error != null) {
-
+                    //TODO handle this error
                 }
             }
         };

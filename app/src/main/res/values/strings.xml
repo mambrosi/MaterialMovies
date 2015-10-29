@@ -37,4 +37,5 @@ Curabitur at ullamcorper lacus. Integer nec feugiat purus, vel porttitor risus. 
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_movies_message">Sorry, there are no Movies to display :(</string>
 </resources>
