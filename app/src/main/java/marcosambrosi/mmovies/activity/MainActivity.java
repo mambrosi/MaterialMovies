@@ -24,20 +24,23 @@ package marcosambrosi.mmovies.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.adapter.MoviesAdapter;
+import marcosambrosi.mmovies.fragment.DiscoverFragment;
+import marcosambrosi.mmovies.fragment.LatestFragment;
 import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.Movie;
-import marcosambrosi.mmovies.model.response.MovieResponse;
 import marcosambrosi.mmovies.network.ServiceController;
 import marcosambrosi.mmovies.util.Constants;
 import retrofit.Callback;
@@ -45,7 +48,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainActivity extends ActionBarActivity implements MoviesAdapter.OnMovieClickedListener {
+public class MainActivity extends AppCompatActivity implements MoviesAdapter.OnMovieClickedListener {
 
 
     @Override
@@ -94,38 +97,12 @@ public class MainActivity extends ActionBarActivity implements MoviesAdapter.OnM
 
     private void listOnCreate() {
         setContentView(R.layout.activity_main);
+        
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-
-        RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
-
-        recyclerViewMovies.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewMovies.setHasFixedSize(true);
-
-        final MoviesAdapter adapter = new MoviesAdapter();
-
-        adapter.setMovieClickedListener(this);
-
-        recyclerViewMovies.setAdapter(adapter);
-
-        ServiceController.getInstance().discoverMovies(new Callback<MovieResponse>() {
-            @Override
-            public void success(MovieResponse movieResponse, Response response) {
-                if (movieResponse != null) {
-                    adapter.addAll(movieResponse.movies);
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-                if (error != null) {
-
-                }
-            }
-        });
-
-
+        viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -139,4 +116,39 @@ public class MainActivity extends ActionBarActivity implements MoviesAdapter.OnM
                 makeSceneTransitionAnimation(this, (View) movieImage, "movie_image");
         startActivity(intent, options.toBundle());
     }
+
+    public class SectionPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return DiscoverFragment.newInstance();
+                case 1:
+                default:
+                    return LatestFragment.newInstance();
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Discover";
+                case 1:
+                default:
+                    return "Latest";
+            }
+        }
+    }
+
 }
