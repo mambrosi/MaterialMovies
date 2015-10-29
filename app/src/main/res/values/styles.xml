@@ -47,8 +47,9 @@
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">?android:textColorPrimary</item>
-        <item name="tabBackground">?attr/colorPrimary</item>
+        <item name="tabIndicatorColor">?android:colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="android:background">?attr/colorPrimary</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
 
