@@ -2,15 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="marcosambrosi.mmovies.fragment.DiscoverFragment">
+    tools:context="marcosambrosi.mmovies.fragment.MovieListFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" />
+        android:paddingBottom="@dimen/padding_small"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_small" />
 </FrameLayout>

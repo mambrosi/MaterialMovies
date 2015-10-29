@@ -2,6 +2,7 @@ package marcosambrosi.mmovies.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.StringDef;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.activity.MovieDetailActivity;
@@ -23,14 +27,31 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class DiscoverFragment extends Fragment implements MoviesAdapter.OnMovieClickedListener {
+public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovieClickedListener {
 
-    public DiscoverFragment() {
+
+    @StringDef({
+            TYPE_DISCOVER,
+            TYPE_LATEST
+    })
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ListType {
+    }
+
+    public static final String TYPE_DISCOVER = "discover";
+    public static final String TYPE_LATEST = "latest";
+
+
+    private String mListType;
+
+    public MovieListFragment() {
         // Required empty public constructor
     }
 
-    public static DiscoverFragment newInstance() {
-        DiscoverFragment fragment = new DiscoverFragment();
+    public static MovieListFragment newInstance(@ListType String listType) {
+        MovieListFragment fragment = new MovieListFragment();
+        fragment.mListType = listType;
         return fragment;
     }
 
@@ -43,7 +64,7 @@ public class DiscoverFragment extends Fragment implements MoviesAdapter.OnMovieC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+        return inflater.inflate(R.layout.fragment_movie_list, container, false);
     }
 
     @Override
@@ -61,7 +82,7 @@ public class DiscoverFragment extends Fragment implements MoviesAdapter.OnMovieC
 
         recyclerViewMovies.setAdapter(adapter);
 
-        ServiceController.getInstance().discoverMovies(new Callback<MovieResponse>() {
+        Callback<MovieResponse> callback = new Callback<MovieResponse>() {
             @Override
             public void success(MovieResponse movieResponse, Response response) {
                 if (movieResponse != null) {
@@ -76,7 +97,13 @@ public class DiscoverFragment extends Fragment implements MoviesAdapter.OnMovieC
 
                 }
             }
-        });
+        };
+
+        if (TYPE_DISCOVER.equals(mListType)) {
+            ServiceController.getInstance().discoverMovies(callback);
+        } else if (TYPE_LATEST.equals(mListType)) {
+            ServiceController.getInstance().nowPlaying(callback);
+        }
 
 
     }

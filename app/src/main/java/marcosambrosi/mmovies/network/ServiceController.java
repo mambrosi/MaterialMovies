@@ -66,6 +66,10 @@ public class ServiceController {
         sService.discoverMovie(Constants.API_KEY, callback);
     }
 
+    public void nowPlaying(Callback<MovieResponse> callback) {
+        sService.nowPlaying(Constants.API_KEY, callback);
+    }
+
     public void configuration(Callback<Configuration> callback) {
         sService.configuration(Constants.API_KEY, callback);
     }

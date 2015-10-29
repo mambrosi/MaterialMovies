@@ -38,8 +38,7 @@ import android.widget.ImageView;
 import marcosambrosi.mmovies.MoviesApplication;
 import marcosambrosi.mmovies.R;
 import marcosambrosi.mmovies.adapter.MoviesAdapter;
-import marcosambrosi.mmovies.fragment.DiscoverFragment;
-import marcosambrosi.mmovies.fragment.LatestFragment;
+import marcosambrosi.mmovies.fragment.MovieListFragment;
 import marcosambrosi.mmovies.model.Configuration;
 import marcosambrosi.mmovies.model.Movie;
 import marcosambrosi.mmovies.network.ServiceController;
@@ -130,11 +129,13 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.OnM
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return DiscoverFragment.newInstance();
+                    return MovieListFragment.newInstance(MovieListFragment.TYPE_DISCOVER);
                 case 1:
+                    return MovieListFragment.newInstance(MovieListFragment.TYPE_LATEST);
                 default:
-                    return LatestFragment.newInstance();
+                    return MovieListFragment.newInstance(MovieListFragment.TYPE_DISCOVER);
             }
+
         }
 
         @Override

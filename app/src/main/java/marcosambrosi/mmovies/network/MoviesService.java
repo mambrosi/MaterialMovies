@@ -37,6 +37,10 @@ public interface MoviesService {
     @GET("/discover/movie")
     void discoverMovie(@Query("api_key") String apiKey, Callback<MovieResponse> callback);
 
+
+    @GET("/movie/now_playing")
+    void nowPlaying(@Query("api_key") String apiKey, Callback<MovieResponse> callback);
+
     @GET("/movie/{id}/reviews")
     void getMovieReviews(@Query("api_key") String apiKey, @Path("id") String movieId,
                          Callback<ReviewResponse> callback);
