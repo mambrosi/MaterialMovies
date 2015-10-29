@@ -28,8 +28,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovieClickedListener {
+public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovieClickedListener, Callback<MovieResponse> {
 
+
+    private StateView mStateView;
 
     @StringDef({
             TYPE_DISCOVER,
@@ -75,14 +77,21 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final StateView stateView = (StateView) view.findViewById(R.id.state_view);
+        mStateView = (StateView) view.findViewById(R.id.state_view);
 
-        stateView.showLoading();
+
+        mStateView.setOnEmptyClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getMovies();
+            }
+        });
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        RecyclerView recyclerViewMovies = (RecyclerView) stateView.
+        RecyclerView recyclerViewMovies = (RecyclerView) mStateView.
                 findViewById(R.id.recycler_view_movies);
 
         recyclerViewMovies.setHasFixedSize(true);
@@ -91,40 +100,46 @@ public class MovieListFragment extends Fragment implements MoviesAdapter.OnMovie
         mAdapter.setMovieClickedListener(this);
         recyclerViewMovies.setAdapter(mAdapter);
 
-        Callback<MovieResponse> callback = new Callback<MovieResponse>() {
-            @Override
-            public void success(MovieResponse movieResponse, Response response) {
+        getMovies();
 
-                if (movieResponse != null) {
 
-                    if (movieResponse.movies.isEmpty()) {
-                        stateView.showEmpty();
-                    } else {
-                        mAdapter.addAll(movieResponse.movies);
-                        stateView.showContent();
-                    }
+    }
 
-                } else {
-                    //TODO handle this error
-                }
-            }
+    private void getMovies() {
 
-            @Override
-            public void failure(RetrofitError error) {
-
-                if (error != null) {
-                    //TODO handle this error
-                }
-            }
-        };
+        mStateView.showLoading();
 
         if (TYPE_DISCOVER.equals(mListType)) {
-            ServiceController.getInstance().discoverMovies(callback);
+            ServiceController.getInstance().discoverMovies(this);
         } else if (TYPE_LATEST.equals(mListType)) {
-            ServiceController.getInstance().nowPlaying(callback);
+            ServiceController.getInstance().nowPlaying(this);
+        } else {
+
+            throw new IllegalArgumentException("You need to provide a valid list type");
         }
 
+    }
 
+    @Override
+    public void success(MovieResponse movieResponse, Response response) {
+
+        if (movieResponse != null) {
+
+            if (movieResponse.movies.isEmpty()) {
+                mStateView.showEmpty();
+            } else {
+                mAdapter.addAll(movieResponse.movies);
+                mStateView.showContent();
+            }
+
+        } else {
+            //TODO handle this error
+        }
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        mStateView.showEmpty();
     }
 
     @Override

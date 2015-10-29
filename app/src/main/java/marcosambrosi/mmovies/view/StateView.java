@@ -21,6 +21,9 @@ public class StateView extends ViewFlipper {
     private int mLoadingResourceId, mContentResourceId, mEmptyResourceId;
     private View mLoadingView, mContentView, mEmptyView;
 
+
+    private OnClickListener mOnEmptyClickListener;
+
     public View getLoadingView() {
         return mLoadingView;
     }
@@ -80,10 +83,17 @@ public class StateView extends ViewFlipper {
         super.onFinishInflate();
 
 
-
         if (mLoadingView == null) setLoadingView(mLoadingResourceId);
         if (mContentView == null) setContentView(mContentResourceId);
-        if (mEmptyView == null) setEmptyView(mEmptyResourceId);
+        if (mEmptyView == null) {
+            setEmptyView(mEmptyResourceId);
+            mEmptyView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnEmptyClickListener != null) mOnEmptyClickListener.onClick(v);
+                }
+            });
+        }
 
         cacheViewIndices();
     }
@@ -110,6 +120,15 @@ public class StateView extends ViewFlipper {
             return setLoadingView(contentView);
         }
         return null;
+    }
+
+    /**
+     * Sets a click listener to the Empty View
+     *
+     * @param onEmptyClickListener
+     */
+    public void setOnEmptyClickListener(OnClickListener onEmptyClickListener) {
+        this.mOnEmptyClickListener = onEmptyClickListener;
     }
 
     /**
