@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,10 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
 
     @Override
     public void onBindViewHolder(ReviewViewHolder holder, int position) {
+        Review review = mReviews.get(position);
+
+        holder.textViewAuthor.setText(review.author);
+        holder.textViewContent.setText(review.content);
 
     }
 
@@ -48,8 +53,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
 
+        TextView textViewAuthor;
+        TextView textViewContent;
+
         public ReviewViewHolder(View itemView) {
             super(itemView);
+
+            textViewAuthor = (TextView) itemView.findViewById(R.id.review_author);
+            textViewContent = (TextView) itemView.findViewById(R.id.review_content);
         }
     }
 }

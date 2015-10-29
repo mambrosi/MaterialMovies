@@ -41,11 +41,9 @@
     </style>
 
     <style name="AppTheme.TransparentStatusBar" parent="AppTheme">
-        <item name="android:windowTranslucentStatus">true</item>
-
-        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
 

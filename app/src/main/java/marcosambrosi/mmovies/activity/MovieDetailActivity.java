@@ -3,11 +3,13 @@ package marcosambrosi.mmovies.activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
@@ -26,11 +28,16 @@ import retrofit.client.Response;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,7 +48,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Movie movie = Movie.fromJsonString(getIntent().getStringExtra(Constants.EXTRA.MOVIE));
 
-        getSupportActionBar().setTitle(movie.title);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
+        mCollapsingToolbarLayout.
+                setTitle(movie.title);
+
 
         final ImageView movieImage = (ImageView) findViewById(R.id.movie_image);
 
@@ -62,16 +72,16 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     }
                 });
-
-        ImageView moviePoster = (ImageView) findViewById(R.id.movie_poster);
-
-        String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
-                .concat("w342")
-                .concat(movie.posterPath);
-
-        Picasso.with(this)
-                .load(posterUrl)
-                .into(moviePoster);
+//
+//        ImageView moviePoster = (ImageView) findViewById(R.id.movie_poster);
+//
+//        String posterUrl = MoviesApplication.getInstance().getConfiguration().image.baseUrl
+//                .concat("w342")
+//                .concat(movie.posterPath);
+//
+//        Picasso.with(this)
+//                .load(posterUrl)
+//                .into(moviePoster);
 
 
         RecyclerView recyclerViewMovies = (RecyclerView) findViewById(R.id.recycler_view_reviews);
@@ -107,17 +117,15 @@ public class MovieDetailActivity extends AppCompatActivity {
         Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
-                Palette.Swatch vibrantSwatch = palette.getDarkVibrantSwatch();
+                Palette.Swatch vibrantSwatch = palette.getLightVibrantSwatch();
 
-                if (vibrantSwatch != null) {
-                    mToolbar.setTitleTextColor(vibrantSwatch.
-                            getTitleTextColor());
-                    mToolbar.setBackgroundColor(vibrantSwatch.
-                            getRgb());
-
-                    getWindow().getDecorView().setBackgroundColor(vibrantSwatch.
-                            getRgb());
-                }
+//                if (vibrantSwatch != null) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        Window window = getWindow();
+//                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//                        window.setStatusBarColor(vibrantSwatch.getRgb());
+//                    }
+//                }
             }
         });
 
