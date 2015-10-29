@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     tools:context="marcosambrosi.mmovies.fragment.MovieListFragment">
 
-    <include layout="@layout/movies_content_view" />
-
     <marcosambrosi.mmovies.view.StateView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/state_view"
         android:layout_width="match_parent"
