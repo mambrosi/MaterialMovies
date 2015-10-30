@@ -12,8 +12,14 @@ Simple Android App which implements several Material Design patterns using Googl
 - Activity Transitions
 - Shared Elements Transition
 - Palette
+ 
+##Third party libraries:
+- The Movie Database
+- Retrofit for networking
+- Picasso for image async loading
 
 
+##Screenshots
 
 ![alt tag](https://raw.github.com/mambrosi/MaterialMovies/resources/screenshot1.png)
 
