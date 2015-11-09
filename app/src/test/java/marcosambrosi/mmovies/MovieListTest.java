@@ -1,12 +1,11 @@
 package marcosambrosi.mmovies;
 
-import android.support.v7.widget.RecyclerView;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import marcosambrosi.mmovies.activity.MainActivity;
 
@@ -17,26 +16,19 @@ import static org.junit.Assert.assertNotNull;
  */
 
 @RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class MovieListTest {
 
     MainActivity mMainActivity;
 
     @Before
     public void setUp() throws Exception {
-        mMainActivity = Robolectric.setupActivity(MainActivity.class);
+        mMainActivity = Robolectric.buildActivity(MainActivity.class).create().get();
     }
 
     @Test
-    public void test_activity_exists() {
-        assertNotNull(null);
-    }
-
-    @Test
-    public void test_recycler_view_exists() {
-        RecyclerView recyclerView = (RecyclerView) mMainActivity.
-                findViewById(R.id.recycler_view_movies);
-        assertNotNull(recyclerView);
-
+    public void testActivityExists() {
+        assertNotNull(mMainActivity);
     }
 
 

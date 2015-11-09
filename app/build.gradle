@@ -63,7 +63,7 @@ dependencies {
 
     // Unit testing dependencies
     testCompile 'junit:junit:4.12'
-    testCompile('org.robolectric:robolectric:3.0-rc2') {
+    testCompile('org.robolectric:robolectric:3.0') {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }
