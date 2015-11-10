@@ -5,10 +5,9 @@
 general:
     artifacts:
         - /home/ubuntu/MaterialMovies/app/build/outputs/apk/
-
-     branches:
-            ignore:
-            - dev
+branches:
+    ignore:
+        - dev
 
 machine:
     environment:
