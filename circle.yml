@@ -6,6 +6,10 @@ general:
     artifacts:
         - /home/ubuntu/MaterialMovies/app/build/outputs/apk/
 
+     branches:
+            ignore:
+            - dev
+
 machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
