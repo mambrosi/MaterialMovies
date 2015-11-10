@@ -42,9 +42,6 @@
 
     <style name="AppTheme.TransparentStatusBar" parent="AppTheme">
         <item name="colorPrimary">@android:color/transparent</item>
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
-        <!--<item name="android:toolbarStyle">@style/AppTheme.DetailToolbar</item>-->
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
@@ -56,9 +53,7 @@
     </style>
 
     <style name="AppTheme.DetailToolbar" parent="Widget.AppCompat.Toolbar">
-
         <item name="actionMenuTextColor">?attr/colorAccent</item>
-
     </style>
 
 
