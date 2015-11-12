@@ -43,6 +43,7 @@
     <style name="AppTheme.TransparentStatusBar" parent="AppTheme">
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">

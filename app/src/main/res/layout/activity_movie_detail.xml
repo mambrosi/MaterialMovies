@@ -16,8 +16,8 @@
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
@@ -28,7 +28,7 @@
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
                 android:transitionName="movie_image"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" android:fitsSystemWindows="true"/>
 
 
 
