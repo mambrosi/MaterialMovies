@@ -79,7 +79,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(movieImage, new Callback() {
                     @Override
                     public void onSuccess() {
-                        applyPalette(movieImage);
+                        //applyPalette(movieImage);
                     }
 
                     @Override
