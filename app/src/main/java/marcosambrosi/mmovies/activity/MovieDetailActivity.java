@@ -1,27 +1,16 @@
 package marcosambrosi.mmovies.activity;
 
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import marcosambrosi.mmovies.MoviesApplication;
@@ -76,18 +65,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Picasso.with(this)
                 .load(backdropUrl)
-                .into(movieImage, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        //applyPalette(movieImage);
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
-
+                .into(movieImage);
 
 
         ServiceController.getInstance().getMovieReviews(movie.id,
@@ -127,41 +105,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                             }
                         })
                 .show();
-    }
-
-    private void applyPalette(final ImageView source) {
-        final Bitmap bitmap = ((BitmapDrawable) source.
-                getDrawable()).
-                getBitmap();
-
-        new Palette.Builder(bitmap).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-                Palette.Swatch vibrantSwatch = palette.getDarkVibrantSwatch();
-
-                if (vibrantSwatch != null) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        Window window = getWindow();
-                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                        window.setStatusBarColor(vibrantSwatch.getRgb());
-                    }
-
-                    mAddToWatchlistButton.
-                            setBackgroundTintList(ColorStateList.valueOf(vibrantSwatch.getRgb()));
-
-                    mAddToWatchlistButton.setRippleColor(vibrantSwatch.getRgb());
-
-                    final Drawable upArrow = ContextCompat.getDrawable(MovieDetailActivity.this,
-                            R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-                    upArrow.setColorFilter(vibrantSwatch.getTitleTextColor(),
-                            PorterDuff.Mode.SRC_ATOP);
-
-                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
-                }
-            }
-        });
-
-
     }
 
 }
