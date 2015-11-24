@@ -21,9 +21,9 @@ Simple Android App which implements several Material Design patterns using Googl
 
 ##Screenshots
 
-![alt tag](https://raw.github.com/mambrosi/MaterialMovies/resources/screenshot1.png)
+![alt tag](https://raw.github.com/mambrosi/MaterialMovies/master/screenshot1.png)
 
-![alt tag](https://raw.github.com/mambrosi/MaterialMovies/resources/screenshot2.png)
+![alt tag](https://raw.github.com/mambrosi/MaterialMovies/master/screenshot2.png)
 
 
 
