@@ -37,6 +37,7 @@
         <item name="colorAccent">@color/white</item>
 
         <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
 
     </style>
 
