@@ -11,7 +11,6 @@ Simple Android App which implements several Material Design patterns using Googl
 - Toolbar
 - Activity Transitions
 - Shared Elements Transition
-- Palette
  
 ##Third party libraries:
 - The Movie Database
