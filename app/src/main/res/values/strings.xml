@@ -29,4 +29,5 @@
     <string name="empty_movies_message">Sorry, there are no Movies to display :( \nTap to try again</string>
     <string name="snackbar_action_undo">undo</string>
     <string name="movie_added_to_watchlist">Movie added to watchlist</string>
+    <string name="watch_on_netflix">Watch on Netflix</string>
 </resources>
