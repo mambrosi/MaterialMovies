@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.splash_screen);
+//        setContentView(R.layout.splash_screen);
 
+
+        getWindow().setBackgroundDrawable(getDrawable(R.drawable.window_background));
 
         if (MoviesApplication.getInstance().hasConfiguration()) {
 
@@ -99,6 +101,8 @@ public class MainActivity extends AppCompatActivity{
 
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
+
+        getWindow().setBackgroundDrawable(null);
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
